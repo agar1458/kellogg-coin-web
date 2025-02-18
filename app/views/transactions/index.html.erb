@@ -23,6 +23,19 @@
   </ol>
 
 <!-- Step 2: Calculate and display the balances -->
+<ul>
+  Expected Balances: 
+  <% for user in users %>
+  <% amount_received = Transaction.where({"to_user_id" => user["id"]}).sum("amount") %>
+  <% amount_sent = Transaction.where({"from_user_id" => user["id"]}).sum("amount") %>
+  <%balance = amount_received - amount_sent %>
+
+  <li>Balance for <%= user["name"]%> : <%= balance%> </li>
+  <%end%>
+</ul>
+
+
+
 
 <!-- 
 Expected balances:
